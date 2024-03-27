@@ -6,8 +6,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 //$encryptedPass=password_hash($password, PASSWORD_DEFAULT);
 
-$connection=mysqli_connect('localhost','root','','student');
-$query = "INSERT INTO info(name, email, password) VALUES ('$name','$email','$password')";
+$connection=mysqli_connect('localhost','Suresh','poppunk','bca');
+$query = "INSERT INTO users(name, email) VALUES ('$name','$email')";
 $result= mysqli_query($connection,$query);
  if($result){
     header("Location:login.php");

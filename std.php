@@ -11,36 +11,27 @@
 <body>
   <?php
    include_once("nav.php");
+   include_once("checkAuth.php");
+   
+   $id= null;
+   $name= "";
+   $dob= "";
+   $course= "";
+
 if(isset($_REQUEST['id'])){
   $id=$_REQUEST['id'];
-   $name="";
-   $dob="";
-   $address="";
-   $gender="";
-   $phone="";
-   $course="";
-  if($id!=null){
-    $connect=mysqli_connect('localhost','root','','student');
-  
-    $query="Select * from information where id=$id";
-  
-    $result=mysqli_query($connect,$query);
-  
- 
-  
+    $connection=mysqli_connect('localhost','Suresh','poppunk','december');
+    $query="Select * from students where id=$id";
+    $result=mysqli_query($connection,$query);
     if($result){
      while($user = $result->fetch_assoc()){
        $id=$user["id"];
        $name=$user["name"];
-       $address=$user["address"];
-       $gender=$user["gender"];
        $dob=$user["dob"];
-       $phone=$user["number"];
-       $course=$user["course"];
+       $course=$user["faculty"];
       
      }
     }
-  }
 }
    
  
@@ -50,29 +41,20 @@ if(isset($_REQUEST['id'])){
 
 <form action="stdController.php" method="post"><h1>Student Form</h1>
 
-<input type="hidden" name="id" value="<?php echo !empty($id)?$id:""?>">
+<input type="hidden" name="id" value="<?php echo  $id ?>">
 
   <label for="name">Name</label>
-  <input type="text"  id="name" name="name" value="<?php echo !empty($name)?$name:""?>"><br>
+  <input type="text"  id="name" name="name" value="<?php echo $name?>"><br>
 
-  <label for="address">Address</label>
-  <input type="text" id="address" name="address" value="<?php echo !empty($address)?$address:""?>"><br>
 
   <label for="dateOfBirth">Date Of Birth</label>
-  <input type="date" id="dateOfBirth" name="dob" value="<?php echo !empty($dob)?$dob:""?>"><br>
+  <input type="date" id="dateOfBirth" name="dob" value="<?php echo  $dob?>"><br>
 
-  <label for="gender">Gender</label>
-  <div id="gen">
-    <select name="gender" id="gender">
-      <option value="">Choose your gender</option>
-      <option value="male" <?php echo !empty($gender) ?($gender == 'male') ? 'selected="selected"' : '' : ""; ?>>Male</option>
-    <option value="female" <?php echo !empty($gender) ? ($gender == 'female') ? 'selected="selected"' : '':""; ?>>Female</option>
-    </select>
+  
   </div><br>
   
 
-  <label for="phoneNumber">Phone Number</label>
-  <input type="tel" id="phoneNumber" name="phoneNumber" value="<?php echo !empty($number)?$number:""?>"><br>
+
 
 
   <label for="course" >Courses</label>

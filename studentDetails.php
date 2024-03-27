@@ -7,9 +7,11 @@
 </head>
 <body>
 <?php
+include_once("checkAuth.php");
+
 include_once("nav.php");
- $connection=mysqli_connect('localhost','root','','student');
-$query1="SELECT * FROM information";
+ $connection=mysqli_connect('localhost','Suresh','poppunk','december');
+$query1="SELECT * FROM students";
 $result1 = mysqli_query($connection, $query1);
 if($result1){     
 ?>
@@ -18,10 +20,7 @@ if($result1){
 <tr>
     <th>ID</th>
     <th>Name</th>
-    <th>Address</th>
     <th>Date of birth</th>
-    <th>Gender</th>
-    <th>Phone Number</th>
     <th>Course</th>
     <th>Edit | Delete</th>
 
@@ -36,20 +35,13 @@ if($result1){
     <td>
         <?php echo $user["name"];?>
     </td>
-    <td>
-        <?php echo $user["address"];?>
-    </td>
+
     <td>
         <?php echo $user["dob"];?> 
     </td>
+ 
     <td>
-         <?php echo $user["gender"];?>
-    </td>
-    <td>
-        <?php echo $user["number"];?>
-    </td>
-    <td>
-        <?php echo $user["course"];?>
+        <?php echo $user["faculty"];?>
     </td>
     <td>
         <a href="std.php?id=<?=$user["id"]?>">Edit</a> | 
